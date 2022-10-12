@@ -1,0 +1,89 @@
+
+.addTarefaForm {
+  min-width: 736px;
+  display: flex;
+  gap: 8px;
+  margin: 0;
+  
+}
+
+.addTarefaForm input[type=text] {
+  width: 638px;
+  height: 56px;
+  background-color: var(--gray-500);
+  color: var(--gray-100);
+  border: 1px solid var(--gray-700);
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 400;
+  resize: none;
+  padding: 1rem;
+  
+}
+
+.addTarefaForm input[type=text]:focus {
+  outline: transparent;
+  box-shadow: 0 0 0 1px var(--purple);
+}
+
+.addTarefaForm button[type=submit] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 56px;
+  width: 95px;
+  border-radius: 8px;
+  border: 1px solid;
+  border-color: var(--gray-700);
+  background-color: var(--blue-dark);
+  font-size: 0.875rem;
+  color: var(--gray-100);
+  font-weight: bold;
+  cursor: pointer;
+
+  transition: color 0.1s, background-color 0.1s;
+}
+
+.addTarefaForm button[type=submit]:hover {
+  background-color: var(--blue);
+}
+
+
+
+
+
+
+header {
+  margin: 4rem 0 1.5rem;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; 
+  font-size: 1.06rem;
+  font-weight: 700; 
+}
+
+span {
+  background-color: var(--gray-400);
+  padding: 1px 8px;
+  border-radius: 30px;
+  font-size: 0.9rem;
+  color: var(--gray-100);
+}
+
+.taskCount {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  color: var(--blue);
+}
+
+.doneTaskCount {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 9px;
+  color: var(--purple);
+}

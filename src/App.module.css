@@ -1,0 +1,16 @@
+.wrapper {
+  max-width: 46rem;
+  margin: -1.8rem auto;
+  padding: 0;
+
+  display: block;
+  align-items: flex-start;
+}
+
+@media (max-width: 768px){
+
+  html {
+    font-size: 87.5%
+  }
+
+}
