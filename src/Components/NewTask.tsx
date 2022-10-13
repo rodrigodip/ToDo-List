@@ -15,17 +15,17 @@ export function NewTask({ content, id, onChechTask, onUNchechTask, onDeleteTask 
 
   
   function handleDeleteTask (){
-    console.log('Deletado')
+    //console.log('Deletado')
     onDeleteTask(id);
   }
 
   function handleChechTaskChange(event: ChangeEvent<HTMLInputElement>) {
     if (event?.target.checked){
-      console.log('Checked!')
+      //console.log('Checked!')
       onChechTask(id);
     }else{
       onUNchechTask(id);
-      console.log('NOT Checked!')      
+      //console.log('NOT Checked!')      
     }
   }
 

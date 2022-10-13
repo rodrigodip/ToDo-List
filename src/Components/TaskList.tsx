@@ -42,40 +42,24 @@ export function TaskList() {
   }  
 //--//
 
-  const [chekedList, setCheckedList] = useState<TaskContent[]>([
-    {
-      id: 1,
-      content: 'teste checkedList',
-      checked: false,
-    },
-    {
-      id: 2,
-      content: 'teste checkedList 02',
-      checked: true,
-    },
-  ])
-
-  
+  const [checkedList, setCheckedList] = useState<TaskContent[]>([])
 
 //--//
   let taskCount:number = newTaskAdded.length;// Stores number of new Tasks
-  let doneTaskCount:number = 0;// Stores number of done Tasks
+  let doneTaskCount:number = checkedList.length;// Stores number of done Tasks
 
   function chechTask(idToCheck:number) { // Recebe evento Ckeck = true
-    
-    /*const newTaskChecked = newTaskAdded.filter(
+    const isChecked = newTaskAdded.filter(
       function(obj) { return obj.id == idToCheck;}
     )
-
-      console.log(chekedList)
-      console.log(newTaskChecked)
-
-      setCheckedList(newTaskChecked)
-    */
+    setCheckedList([...checkedList, isChecked[0] ])    
   }
   
   function unChechTask(idToUncheck:number) { // Recebe evento Ckeck = false
-       
+    const isUNchecked = checkedList.filter(
+      function(obj) { return obj.id !== idToUncheck;}
+    )
+    setCheckedList(isUNchecked)
   }
   
   function deleteTask(idToDelete:number) {
@@ -83,6 +67,7 @@ export function TaskList() {
       function(obj) { return obj.id !== idToDelete;}
     )
     setTaskAdded(taskListWhithoutDeleted)
+    unChechTask(idToDelete);
   }
   
   
