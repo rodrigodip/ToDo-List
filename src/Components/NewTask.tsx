@@ -1,52 +1,49 @@
-import { Key, Trash } from 'phosphor-react';
-import { useState, ChangeEvent } from 'react';
+import { Trash } from 'phosphor-react';
+import { ChangeEvent } from 'react';
 import styles from './NewTask.module.css'
 
 
-interface NewTaskProps {
+export interface NewTaskProps {
   id: number;
   content: string;
-  
+  checked: boolean;
+  onDeleteTask:  (id:number) => void;
+  onChechTask:   (id:number) => void; 
+  onUNchechTask: (id:number) => void; 
 }
+export function NewTask({ content, id, onChechTask, onUNchechTask, onDeleteTask }:NewTaskProps) {
 
-export function NewTask({ content, id, checked }:NewTaskProps) {
-
-  const [isCheckedList, setIsCheckedList] = useState <NewTaskProps[]> ([
-    
-  ])
   
-  let isChecked: boolean = checked;
-
-  function handleCheckboxChange(event: ChangeEvent<HTMLInputElement>) {
-    
-    const newCheckedTaskList = {
-      id: id,
-      content: content,
-      checked: event?.target.checked
-    }
-
-    if(event?.target.checked){
-      setIsCheckedList([...isCheckedList, newCheckedTaskList])
-    }else{
-     
-     }
-    console.log(isCheckedList);
-    console.log(isCheckedList.keys())
+  function handleDeleteTask (){
+    console.log('Deletado')
+    onDeleteTask(id);
   }
+
+  function handleChechTaskChange(event: ChangeEvent<HTMLInputElement>) {
+    if (event?.target.checked){
+      console.log('Checked!')
+      onChechTask(id);
+    }else{
+      onUNchechTask(id);
+      console.log('NOT Checked!')      
+    }
+  }
+
 
   return(
     <article>
       
       <label className={styles.tarefa}>        
         <input className={styles.checkboxRound}
+          name={'rodrigo'}
           type={'checkbox'}
-          checked={checked}
-          onChange={handleCheckboxChange}
-
+          onChange={handleChechTaskChange}
         />
         <p id='taskContent'>{content}</p>
       </label>
-      <button className={styles.delButton}
+      <button 
+      onClick={handleDeleteTask}
+      className={styles.delButton}
       title='Deletar tarefa.'
       ><Trash size={18}/></button>
 
