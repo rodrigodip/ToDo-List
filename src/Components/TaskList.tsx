@@ -26,8 +26,6 @@ export function TaskList() {
     }
 
     setTaskAdded([...newTaskAdded, newTaskContent]);
-    //console.log(newTaskText);
-    //console.log(newTaskAdded);
     setNewContentText('')
   }
 //--//
@@ -65,12 +63,32 @@ export function TaskList() {
   function deleteTask(idToDelete:number) {
     const taskListWhithoutDeleted = newTaskAdded.filter(
       function(obj) { return obj.id !== idToDelete;}
-    )
-    setTaskAdded(taskListWhithoutDeleted)
-    unChechTask(idToDelete);
+      )
+      setTaskAdded(taskListWhithoutDeleted)
+      unChechTask(idToDelete);
   }
-  
-  
+    
+  function deleteAllTasks() {
+      setTaskAdded([])    
+  }
+
+  function deleteDoneTasks() {
+    
+    // A comparer used to determine if two entries are equal.
+    const isSameUser = (newTaskAdded:TaskContent, checkedList:TaskContent) => newTaskAdded.id === checkedList.id;
+
+    // Get items that only occur in the left array,
+    // using the compareFunction to determine equality.
+    const onlyInLeft = (left:TaskContent[], right:TaskContent[], compareFunction:any) => 
+      left.filter(leftValue =>
+      !right.some(rightValue => 
+      compareFunction(leftValue, rightValue)));
+
+    const onlyInA = onlyInLeft(newTaskAdded, checkedList, isSameUser);
+    
+    setTaskAdded(onlyInA)
+        
+  }
 
   return(    
     <div>
@@ -124,7 +142,14 @@ export function TaskList() {
           )
         })}
       </main>
-      
+      <footer className={styles.footer}>
+        <button title={'Deleta todas as tarefas'}
+          onClick={deleteAllTasks}
+        >Limpar Lista</button>        
+        <button
+          onClick={deleteDoneTasks}
+        >Deletar concluídas</button>
+      </footer>
     </div>     
   )
 }

@@ -49,11 +49,6 @@
   background-color: var(--blue);
 }
 
-
-
-
-
-
 header {
   margin: 4rem 0 1.5rem;
   width: 100%;
@@ -85,5 +80,33 @@ span {
   flex-direction: row;
   align-items: center;
   gap: 9px;
+  color: var(--purple);
+}
+
+.footer {
+  width: 100%;
+  justify-content: space-between;
+  display: flex;
+  border-top: 1px solid var(--gray-500);
+  margin-top: 1rem ;
+}
+
+.footer button {
+  
+  margin-top: 1rem ;
+  background-color: transparent;
+  border: none;
+  color: var(--blue-dark);
+  cursor: pointer;
+}
+
+.footer button + button {
+  color: var(--purple-dark);
+}
+
+.footer button:hover {
+  color: var(--blue);
+}
+.footer button + button:hover {
   color: var(--purple);
 }
