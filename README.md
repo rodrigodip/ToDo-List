@@ -5,15 +5,17 @@
 
 ___
 **Next Implementations**  
-- [ ] A buttons to delete all done tasks
-- [ ] A way to insert details about the task (sub tasks)
+- [x] A button to clean the list
+- [x] A button to delete all done tasks
+- [ ] Characters count
+- [ ] Task details (sub tasks?)
 
 **Tecnologies:**  
 -ReactJS  
 -JavaScript  
 -TypeScript  
 
-**Main knowlogies prarcticed:**  
+**Main knowlogies practiced:**  
 -Components  
 -Components intercommunication  
 -Immutabillity  

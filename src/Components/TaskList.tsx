@@ -5,7 +5,6 @@ import styles from './TaskList.module.css'
 interface TaskContent {
   id: number;
   content: string;
-  checked: boolean;
 }
 
 
@@ -22,7 +21,6 @@ export function TaskList() {
     const newTaskContent = {
       id: Math.random(),
       content: newContentText,
-      checked: false,
     }
 
     setTaskAdded([...newTaskAdded, newTaskContent]);
@@ -38,28 +36,29 @@ export function TaskList() {
     setNewContentText(event?.target.value);
   
   }  
-//--//
+// State & Handler => ContentText <texteArea>
 
   const [checkedList, setCheckedList] = useState<TaskContent[]>([])
 
-//--//
-  let taskCount:number = newTaskAdded.length;// Stores number of new Tasks
-  let doneTaskCount:number = checkedList.length;// Stores number of done Tasks
-
-  function chechTask(idToCheck:number) { // Recebe evento Ckeck = true
+  
+  function chechTask(idToCheck:number) { // Listen to event => Ckeck = true
     const isChecked = newTaskAdded.filter(
       function(obj) { return obj.id == idToCheck;}
-    )
-    setCheckedList([...checkedList, isChecked[0] ])    
-  }
-  
-  function unChechTask(idToUncheck:number) { // Recebe evento Ckeck = false
+      )
+      setCheckedList([...checkedList, isChecked[0] ])    
+    }
+    
+  function unChechTask(idToUncheck:number) { // Listen to event => Ckeck = false
     const isUNchecked = checkedList.filter(
       function(obj) { return obj.id !== idToUncheck;}
-    )
-    setCheckedList(isUNchecked)
-  }
-  
+      )
+      setCheckedList(isUNchecked)
+    }
+//--//
+
+  let taskCount:number = newTaskAdded.length;// Stores number of new Tasks
+  let doneTaskCount:number = checkedList.length;// Stores number of done Tasks
+    
   function deleteTask(idToDelete:number) {
     const taskListWhithoutDeleted = newTaskAdded.filter(
       function(obj) { return obj.id !== idToDelete;}
@@ -69,25 +68,24 @@ export function TaskList() {
   }
     
   function deleteAllTasks() {
-      setTaskAdded([])    
+    setTaskAdded([])   
   }
-
+    
   function deleteDoneTasks() {
     
-    // A comparer used to determine if two entries are equal.
-    const isSameUser = (newTaskAdded:TaskContent, checkedList:TaskContent) => newTaskAdded.id === checkedList.id;
+    const isSameTask = (newTaskAdded:TaskContent, checkedList:TaskContent) => newTaskAdded.id === checkedList.id;
+    // Get checked tasks in the list <checkedList>,
+    // using the compare Function to determine equality.
+    const onlyUnCheked = (list01:TaskContent[], List02:TaskContent[], compareFunction:any) => 
+      list01.filter(list01Value =>
+      !List02.some(List02Value => 
+      compareFunction(list01Value, List02Value)));      
+      
+    const onlyUnCheckedList:TaskContent[] = onlyUnCheked(newTaskAdded, checkedList, isSameTask);
 
-    // Get items that only occur in the left array,
-    // using the compareFunction to determine equality.
-    const onlyInLeft = (left:TaskContent[], right:TaskContent[], compareFunction:any) => 
-      left.filter(leftValue =>
-      !right.some(rightValue => 
-      compareFunction(leftValue, rightValue)));
-
-    const onlyInA = onlyInLeft(newTaskAdded, checkedList, isSameUser);
-    
-    setTaskAdded(onlyInA)
-        
+    setTaskAdded(onlyUnCheckedList);
+    setCheckedList([]); 
+      
   }
 
   return(    
@@ -127,21 +125,26 @@ export function TaskList() {
           <span>{`${doneTaskCount} de ${taskCount}`}</span>
         </div>
       </header>
+
       <main>
-        {newTaskAdded.map(task =>{
-          return(
-            <NewTask
-            key={task.id}
-            id={task.id}
-            content={task.content}
-            checked={task.checked}
-            onDeleteTask={deleteTask}
-            onChechTask={chechTask}
-            onUNchechTask={unChechTask}         
-            />
-          )
-        })}
+        {  
+        
+            newTaskAdded.map(task =>{
+              return(
+                <NewTask
+                key={task.id}
+                id={task.id}
+                content={task.content}
+                onDeleteTask={deleteTask}
+                onChechTask={chechTask}
+                onUNchechTask={unChechTask}         
+                />
+              )
+            })
+          
+        }
       </main>
+
       <footer className={styles.footer}>
         <button title={'Deleta todas as tarefas'}
           onClick={deleteAllTasks}

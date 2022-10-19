@@ -6,7 +6,6 @@ import styles from './NewTask.module.css'
 export interface NewTaskProps {
   id: number;
   content: string;
-  checked: boolean;
   onDeleteTask:  (id:number) => void;
   onChechTask:   (id:number) => void; 
   onUNchechTask: (id:number) => void; 
