@@ -144,7 +144,12 @@ export function TaskList() {
             )}
           ) : <EmptyList/>
         }
-        {newTaskAdded.length !== 0 && <Footer/>}          
+        {isEmpty !== 0 &&
+        <Footer
+          onDeleteAllTasks={deleteAllTasks}
+          onDeleteDoneTasks={deleteDoneTasks}
+        />
+        }          
       </main>      
     </div>     
   )
