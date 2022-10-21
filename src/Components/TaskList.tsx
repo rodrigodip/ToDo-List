@@ -86,9 +86,9 @@ export function TaskList() {
     const onlyUnCheckedList:TaskContent[] = onlyUnCheked(newTaskAdded, checkedList, isSameTask);
 
     setTaskAdded(onlyUnCheckedList);
-    setCheckedList([]); 
-      
+    setCheckedList([]);       
   }
+
   const isEmpty = newTaskAdded.length;
   return(    
     <div>

@@ -8,22 +8,15 @@ interface FooterProps {
 
 export function Footer({onDeleteAllTasks, onDeleteDoneTasks }:FooterProps) {
 
-  function handleDeleteAllTasks() {
-    onDeleteAllTasks();
-    
-  }
-  function handleDeleteDoneTasks() {
-    onDeleteDoneTasks();
-    
-  }
+  
 
   return(
     <footer className={styles.footer}>
         <button title={'Deleta todas as tarefas'}
-          onClick={handleDeleteAllTasks}
+          onClick={onDeleteAllTasks}
         >Limpar Lista</button>        
         <button
-          onClick={handleDeleteDoneTasks}
+          onClick={onDeleteDoneTasks}
         >Deletar concluídas</button>
       </footer>    
   )
