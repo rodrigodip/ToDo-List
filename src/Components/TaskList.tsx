@@ -1,6 +1,8 @@
 import { useState,ChangeEvent} from 'react';
 import { NewTask } from './NewTask'
-import styles from './TaskList.module.css'
+import { EmptyList } from './EmptyList';
+import { Footer } from './Footer';
+import styles from './TaskList.module.css';
 
 interface TaskContent {
   id: number;
@@ -87,7 +89,7 @@ export function TaskList() {
     setCheckedList([]); 
       
   }
-
+  const isEmpty = newTaskAdded.length;
   return(    
     <div>
 
@@ -127,32 +129,23 @@ export function TaskList() {
       </header>
 
       <main>
-        {  
         
-            newTaskAdded.map(task =>{
-              return(
-                <NewTask
-                key={task.id}
-                id={task.id}
-                content={task.content}
-                onDeleteTask={deleteTask}
-                onChechTask={chechTask}
-                onUNchechTask={unChechTask}         
-                />
-              )
-            })
-          
+        {isEmpty ?             
+          newTaskAdded.map(task =>{
+            return(
+              <NewTask
+              key={task.id}
+              id={task.id}
+              content={task.content}
+              onDeleteTask={deleteTask}
+              onChechTask={chechTask}
+              onUNchechTask={unChechTask}         
+              />
+            )}
+          ) : <EmptyList/>
         }
-      </main>
-
-      <footer className={styles.footer}>
-        <button title={'Deleta todas as tarefas'}
-          onClick={deleteAllTasks}
-        >Limpar Lista</button>        
-        <button
-          onClick={deleteDoneTasks}
-        >Deletar concluídas</button>
-      </footer>
+        {newTaskAdded.length !== 0 && <Footer/>}          
+      </main>      
     </div>     
   )
 }

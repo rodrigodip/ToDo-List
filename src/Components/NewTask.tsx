@@ -14,27 +14,22 @@ export function NewTask({ content, id, onChechTask, onUNchechTask, onDeleteTask 
 
   
   function handleDeleteTask (){
-    //console.log('Deletado')
     onDeleteTask(id);
   }
 
   function handleChechTaskChange(event: ChangeEvent<HTMLInputElement>) {
     if (event?.target.checked){
-      //console.log('Checked!')
       onChechTask(id);
     }else{
-      onUNchechTask(id);
-      //console.log('NOT Checked!')      
+      onUNchechTask(id);     
     }
   }
-
 
   return(
     <article>
       
       <label className={styles.tarefa}>        
         <input className={styles.checkboxRound}
-          name={'rodrigo'}
           type={'checkbox'}
           onChange={handleChechTaskChange}
         />

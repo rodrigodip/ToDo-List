@@ -1,5 +1,13 @@
 .empty {
   width: 100%;
-  border-top: 1px solid var(--grey-400);
   border-radius: 8px;
+  border-top: 1px solid var(--gray-400);
+  padding-top: 64px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--gray-400);
+}
+.empty p , strong{
+  color: var(--gray-300);
 }
